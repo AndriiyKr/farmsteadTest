@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿// <copyright file="TreeSortDTO.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
@@ -40,3 +41,17 @@ namespace FarmsteadMap.BLL.Data.DTO
         required public string TreeImage { get; set; }
     }
 }
+=======
+﻿namespace FarmsteadMap.BLL.Data.DTO
+{
+    public class TreeSortDTO
+    {
+        public long Id { get; set; }
+        public string Name { get; set; }
+        public string GroundType { get; set; }
+        public long TreeId { get; set; }
+        public string TreeName { get; set; }
+        public string TreeImage { get; set; }
+    }
+}
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3

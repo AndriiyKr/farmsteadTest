@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿// <copyright file="Map.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
@@ -35,3 +36,16 @@ namespace FarmsteadMap.DAL.Data.Models
         public long UserId { get; set; }
     }
 }
+=======
+﻿namespace FarmsteadMap.DAL.Data.Models
+{
+    public class Map
+    {
+        public long Id { get; set; }
+        public string Name { get; set; }
+        public string MapJson { get; set; }
+        public bool IsPrivate { get; set; }
+        public long UserId { get; set; }
+    }
+}
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3

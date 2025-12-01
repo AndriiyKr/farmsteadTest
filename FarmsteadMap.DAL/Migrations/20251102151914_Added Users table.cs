@@ -1,14 +1,22 @@
+<<<<<<< HEAD
 ﻿// <copyright file="20251102151914_Added Users table.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
+=======
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
 
 #nullable disable
 
 namespace FarmsteadMap.DAL.Migrations
 {
+<<<<<<< HEAD
     using Microsoft.EntityFrameworkCore.Migrations;
     using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
+=======
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
     /// <inheritdoc />
     public partial class AddedUserstable : Migration
     {
@@ -28,7 +36,11 @@ namespace FarmsteadMap.DAL.Migrations
                     firstname = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true),
                     lastname = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true),
                     is_Active = table.Column<bool>(type: "boolean", nullable: false, defaultValue: true),
+<<<<<<< HEAD
                     avatar = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
+=======
+                    avatar = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true)
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
                 },
                 constraints: table =>
                 {

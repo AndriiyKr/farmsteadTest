@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // <copyright file="UserDTO.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
@@ -47,6 +48,19 @@ namespace FarmsteadMap.BLL.Data.DTO
         /// <summary>
         /// Gets or sets the path or URL to the user's avatar image.
         /// </summary>
+=======
+namespace FarmsteadMap.BLL.Data.DTO
+{
+    public class UserDTO
+    {
+        public long Id { get; set; }
+        public string Email { get; set; }
+        public string Username { get; set; }
+        public string? Firstname { get; set; }
+        public string? Lastname { get; set; }
+        public bool IsSuperuser { get; set; }
+        public bool IsActive { get; set; }
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         public string? Avatar { get; set; }
     }
 }

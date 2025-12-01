@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // <copyright file="LoginRequestDTO.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
@@ -18,5 +19,13 @@ namespace FarmsteadMap.BLL.Data.DTO
         /// Gets or sets the password of the user.
         /// </summary>
         required public string Password { get; set; }
+=======
+namespace FarmsteadMap.BLL.Data.DTO
+{
+    public class LoginRequestDTO
+    {
+        public string Username { get; set; }
+        public string Password { get; set; }
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
     }
 }

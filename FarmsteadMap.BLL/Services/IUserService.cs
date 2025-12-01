@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿// <copyright file="IUserService.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
@@ -39,5 +40,18 @@ namespace FarmsteadMap.BLL.Services
         /// <param name="userId">The unique identifier of the user.</param>
         /// <returns>A response containing the user data.</returns>
         Task<BaseResponseDTO<UserDTO>> GetUserDataAsync(long userId);
+=======
+﻿// FarmsteadMap.BLL/Services/Interfaces/IUserService.cs
+using FarmsteadMap.BLL.Data.DTO;
+
+namespace FarmsteadMap.BLL.Services
+{
+    public interface IUserService
+    {
+        Task<BaseResponseDTO<UserDTO>> GetUserByIdAsync(long userId); // для змін в бд
+        Task<BaseResponseDTO<UserDTO>> GetUserByEmailAsync(string email);
+        Task<BaseResponseDTO<UserDTO>> GetUserByUsernameAsync(string username);
+        Task<BaseResponseDTO<UserDTO>> GetUserDataAsync(long userId); // для читання
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
     }
 }

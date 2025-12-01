@@ -1,7 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+<<<<<<< HEAD
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+=======
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
     <OutputType>WinExe</OutputType>
     <TargetFramework>net9.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
@@ -10,13 +13,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+<<<<<<< HEAD
     <None Remove="Documents\privacy_policy.pdf" />
     <None Remove="Documents\terms_of_use.pdf" />
+=======
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
     <None Remove="Images\baner_background.jpg" />
     <None Remove="Images\logo.png" />
   </ItemGroup>
 
   <ItemGroup>
+<<<<<<< HEAD
     <Content Include="Documents\privacy_policy.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -26,11 +33,14 @@
   </ItemGroup>
 
   <ItemGroup>
+=======
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.10" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.10" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.10" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.10" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.10" />
+<<<<<<< HEAD
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3595.46" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
@@ -38,6 +48,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+=======
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
   </ItemGroup>
 
   <ItemGroup>

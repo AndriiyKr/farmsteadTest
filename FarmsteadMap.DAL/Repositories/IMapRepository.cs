@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿// <copyright file="IMapRepository.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
@@ -125,6 +126,35 @@ namespace FarmsteadMap.DAL.Repositories
         /// <param name="veg1Id">The identifier of the first vegetable.</param>
         /// <param name="veg2Id">The identifier of the second vegetable.</param>
         /// <returns>True if the vegetables are incompatible; otherwise, false.</returns>
+=======
+﻿using FarmsteadMap.DAL.Data.Models;
+
+namespace FarmsteadMap.DAL.Repositories
+{
+    public interface IMapRepository
+    {
+        // Map operations
+        Task<Map?> GetByIdAsync(long id);
+        Task<List<Map>> GetByUserIdAsync(long userId);
+        Task<long> CreateAsync(Map map);
+        Task<bool> UpdateAsync(Map map);
+        Task<bool> DeleteAsync(long id);
+        Task<bool> ExistsAsync(long id);
+
+        // Elements operations
+        Task<List<TreeSort>> GetTreeSortsAsync();
+        Task<List<VegSort>> GetVegSortsAsync();
+        Task<List<Flower>> GetFlowersAsync();
+        Task<List<Tree>> GetTreesAsync();
+        Task<List<Vegetable>> GetVegetablesAsync();
+
+        // Incompatibility operations
+        Task<List<TreeIncompatibility>> GetTreeIncompatibilitiesAsync();
+        Task<List<VegIncompatibility>> GetVegIncompatibilitiesAsync();
+        Task<List<long>> GetIncompatibleTreeIdsAsync(long treeId);
+        Task<List<long>> GetIncompatibleVegIdsAsync(long vegId);
+        Task<bool> AreTreesIncompatibleAsync(long tree1Id, long tree2Id);
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         Task<bool> AreVegetablesIncompatibleAsync(long veg1Id, long veg2Id);
     }
 }

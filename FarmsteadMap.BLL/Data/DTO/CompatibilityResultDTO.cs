@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿// <copyright file="CompatibilityResultDTO.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
@@ -25,3 +26,14 @@ namespace FarmsteadMap.BLL.Data.DTO
         required public string Severity { get; set; }
     }
 }
+=======
+﻿namespace FarmsteadMap.BLL.Data.DTO
+{
+    public class CompatibilityResultDTO
+    {
+        public bool IsCompatible { get; set; }
+        public string Message { get; set; }
+        public string Severity { get; set; }
+    }
+}
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3

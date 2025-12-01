@@ -1,14 +1,22 @@
+<<<<<<< HEAD
 ﻿// <copyright file="20251103104058_Added tables for maps and map objects.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
+=======
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
 
 #nullable disable
 
 namespace FarmsteadMap.DAL.Migrations
 {
+<<<<<<< HEAD
     using Microsoft.EntityFrameworkCore.Migrations;
     using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
+=======
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
     /// <inheritdoc />
     public partial class Addedtablesformapsandmapobjects : Migration
     {
@@ -23,7 +31,11 @@ namespace FarmsteadMap.DAL.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     ground_type = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: false),
+<<<<<<< HEAD
                     image = table.Column<string>(type: "text", nullable: false),
+=======
+                    image = table.Column<string>(type: "text", nullable: false)
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
                 },
                 constraints: table =>
                 {
@@ -39,7 +51,11 @@ namespace FarmsteadMap.DAL.Migrations
                     name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     map = table.Column<string>(type: "text", nullable: false),
                     is_Private = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
+<<<<<<< HEAD
                     user_id = table.Column<long>(type: "bigint", nullable: false),
+=======
+                    user_id = table.Column<long>(type: "bigint", nullable: false)
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
                 },
                 constraints: table =>
                 {
@@ -59,7 +75,11 @@ namespace FarmsteadMap.DAL.Migrations
                     id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+<<<<<<< HEAD
                     image = table.Column<string>(type: "text", nullable: false),
+=======
+                    image = table.Column<string>(type: "text", nullable: false)
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
                 },
                 constraints: table =>
                 {
@@ -72,7 +92,11 @@ namespace FarmsteadMap.DAL.Migrations
                 {
                     id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+<<<<<<< HEAD
                     name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+=======
+                    name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false)
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
                 },
                 constraints: table =>
                 {
@@ -87,7 +111,11 @@ namespace FarmsteadMap.DAL.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     name = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
                     ground_type = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: false),
+<<<<<<< HEAD
                     tree_id = table.Column<long>(type: "bigint", nullable: false),
+=======
+                    tree_id = table.Column<long>(type: "bigint", nullable: false)
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
                 },
                 constraints: table =>
                 {
@@ -105,7 +133,11 @@ namespace FarmsteadMap.DAL.Migrations
                 columns: table => new
                 {
                     tree1_id = table.Column<long>(type: "bigint", nullable: false),
+<<<<<<< HEAD
                     tree2_id = table.Column<long>(type: "bigint", nullable: false),
+=======
+                    tree2_id = table.Column<long>(type: "bigint", nullable: false)
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
                 },
                 constraints: table =>
                 {
@@ -129,7 +161,11 @@ namespace FarmsteadMap.DAL.Migrations
                 columns: table => new
                 {
                     veg1_id = table.Column<long>(type: "bigint", nullable: false),
+<<<<<<< HEAD
                     veg2_id = table.Column<long>(type: "bigint", nullable: false),
+=======
+                    veg2_id = table.Column<long>(type: "bigint", nullable: false)
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
                 },
                 constraints: table =>
                 {
@@ -157,7 +193,11 @@ namespace FarmsteadMap.DAL.Migrations
                     name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     image = table.Column<string>(type: "text", nullable: false),
                     ground_type = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: false),
+<<<<<<< HEAD
                     veg_id = table.Column<long>(type: "bigint", nullable: false),
+=======
+                    veg_id = table.Column<long>(type: "bigint", nullable: false)
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
                 },
                 constraints: table =>
                 {

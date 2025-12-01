@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿// <copyright file="MapData.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
@@ -43,3 +44,17 @@ namespace FarmsteadMap.DAL.Data.Models
         public DateTime UpdatedAt { get; set; }
     }
 }
+=======
+﻿namespace FarmsteadMap.DAL.Data.Models
+{
+    public class MapData
+    {
+        public string Name { get; set; }
+        public List<MapElement> Elements { get; set; } = new();
+        public List<MeasurementLine> Measurements { get; set; } = new();
+        public List<GardenBed> GardenBeds { get; set; } = new();
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
+    }
+}
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3

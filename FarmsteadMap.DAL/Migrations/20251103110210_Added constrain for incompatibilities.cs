@@ -1,13 +1,20 @@
+<<<<<<< HEAD
 ﻿// <copyright file="20251103110210_Added constrain for incompatibilities.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
+=======
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
 
 #nullable disable
 
 namespace FarmsteadMap.DAL.Migrations
 {
+<<<<<<< HEAD
     using Microsoft.EntityFrameworkCore.Migrations;
 
+=======
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
     /// <inheritdoc />
     public partial class Addedconstrainforincompatibilities : Migration
     {

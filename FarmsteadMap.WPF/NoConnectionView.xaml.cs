@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿// <copyright file="NoConnectionView.xaml.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
@@ -32,6 +33,26 @@ namespace FarmsteadMap.WPF
         private void RetryButton_Click(object sender, RoutedEventArgs e)
         {
             this.RetryClicked?.Invoke(this, EventArgs.Empty);
+=======
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
+
+namespace FarmsteadMap.WPF
+{
+    public partial class NoConnectionView : UserControl
+    {
+        public event EventHandler RetryClicked;
+
+        public NoConnectionView()
+        {
+            InitializeComponent();
+        }
+
+        private void RetryButton_Click(object sender, RoutedEventArgs e)
+        {
+            RetryClicked?.Invoke(this, EventArgs.Empty);
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         }
     }
 }

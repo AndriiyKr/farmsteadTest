@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // <copyright file="IUserRepository.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
@@ -60,5 +61,19 @@ namespace FarmsteadMap.DAL.Repositories
         /// <param name="user">The user entity to delete.</param>
         /// <returns>A task representing the asynchronous operation.</returns>
         Task DeleteAsync(User user);
+=======
+// FarmsteadMap.DAL/Repositories/IUserRepository.cs
+using FarmsteadMap.DAL.Data.Models;
+
+namespace FarmsteadMap.DAL.Repositories
+{
+    public interface IUserRepository
+    {
+        Task<User?> GetByIdAsync(long id);
+        Task<User?> GetByEmailAsync(string email);
+        Task<User?> GetByUsernameAsync(string username);
+        Task AddAsync(User user);
+        Task<User?> GetUserDataAsync(long userId);
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
     }
 }

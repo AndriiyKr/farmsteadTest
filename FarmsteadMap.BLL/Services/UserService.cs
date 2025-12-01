@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿// <copyright file="UserService.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
@@ -30,10 +31,33 @@ namespace FarmsteadMap.BLL.Services
         }
 
         /// <inheritdoc/>
+=======
+﻿// FarmsteadMap.BLL/Services/UserService.cs
+using AutoMapper;
+using FarmsteadMap.BLL.Data.DTO;
+using FarmsteadMap.BLL.Services;
+using FarmsteadMap.DAL.Repositories;
+using FarmsteadMap.DAL.Data.Models;
+
+namespace FarmsteadMap.BLL.Services
+{
+    public class UserService : IUserService
+    {
+        private readonly IUserRepository _userRepository;
+        private readonly IMapper _mapper;
+
+        public UserService(IUserRepository userRepository, IMapper mapper)
+        {
+            _userRepository = userRepository;
+            _mapper = mapper;
+        }
+
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         public async Task<BaseResponseDTO<UserDTO>> GetUserByIdAsync(long userId)
         {
             try
             {
+<<<<<<< HEAD
                 var user = await this.userRepository.GetByIdAsync(userId);
 
                 if (user == null)
@@ -42,6 +66,14 @@ namespace FarmsteadMap.BLL.Services
                 }
 
                 var userDto = this.mapper.Map<UserDTO>(user);
+=======
+                var user = await _userRepository.GetByIdAsync(userId);
+
+                if (user == null)
+                    return BaseResponseDTO<UserDTO>.Fail($"Користувача з ід {userId} не знайдено");
+
+                var userDto = _mapper.Map<UserDTO>(user);
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
                 return BaseResponseDTO<UserDTO>.Ok(userDto);
             }
             catch (Exception ex)
@@ -50,11 +82,15 @@ namespace FarmsteadMap.BLL.Services
             }
         }
 
+<<<<<<< HEAD
         /// <inheritdoc/>
+=======
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         public async Task<BaseResponseDTO<UserDTO>> GetUserByEmailAsync(string email)
         {
             try
             {
+<<<<<<< HEAD
                 var user = await this.userRepository.GetByEmailAsync(email);
 
                 if (user == null)
@@ -63,6 +99,14 @@ namespace FarmsteadMap.BLL.Services
                 }
 
                 var userDto = this.mapper.Map<UserDTO>(user);
+=======
+                var user = await _userRepository.GetByEmailAsync(email);
+
+                if (user == null)
+                    return BaseResponseDTO<UserDTO>.Fail($"Користувача з поштою {email} не знайдено");
+
+                var userDto = _mapper.Map<UserDTO>(user);
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
                 return BaseResponseDTO<UserDTO>.Ok(userDto);
             }
             catch (Exception ex)
@@ -71,11 +115,15 @@ namespace FarmsteadMap.BLL.Services
             }
         }
 
+<<<<<<< HEAD
         /// <inheritdoc/>
+=======
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         public async Task<BaseResponseDTO<UserDTO>> GetUserByUsernameAsync(string username)
         {
             try
             {
+<<<<<<< HEAD
                 var user = await this.userRepository.GetByUsernameAsync(username);
 
                 if (user == null)
@@ -84,6 +132,14 @@ namespace FarmsteadMap.BLL.Services
                 }
 
                 var userDto = this.mapper.Map<UserDTO>(user);
+=======
+                var user = await _userRepository.GetByUsernameAsync(username);
+
+                if (user == null)
+                    return BaseResponseDTO<UserDTO>.Fail($"Користувача з нікнеймом {username} не знайдено");
+
+                var userDto = _mapper.Map<UserDTO>(user);
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
                 return BaseResponseDTO<UserDTO>.Ok(userDto);
             }
             catch (Exception ex)
@@ -92,11 +148,15 @@ namespace FarmsteadMap.BLL.Services
             }
         }
 
+<<<<<<< HEAD
         /// <inheritdoc/>
+=======
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         public async Task<BaseResponseDTO<UserDTO>> GetUserDataAsync(long userId)
         {
             try
             {
+<<<<<<< HEAD
                 var user = await this.userRepository.GetUserDataAsync(userId);
 
                 if (user == null)
@@ -105,6 +165,14 @@ namespace FarmsteadMap.BLL.Services
                 }
 
                 var userDto = this.mapper.Map<UserDTO>(user);
+=======
+                var user = await _userRepository.GetUserDataAsync(userId);
+
+                if (user == null)
+                    return BaseResponseDTO<UserDTO>.Fail($"Користувача з ід {userId} не знайдено");
+
+                var userDto = _mapper.Map<UserDTO>(user);
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
                 return BaseResponseDTO<UserDTO>.Ok(userDto);
             }
             catch (Exception ex)

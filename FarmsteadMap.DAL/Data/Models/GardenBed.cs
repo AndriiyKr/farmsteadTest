@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿// <copyright file="GardenBed.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
@@ -35,3 +36,16 @@ namespace FarmsteadMap.DAL.Data.Models
         required public string Shape { get; set; }
     }
 }
+=======
+﻿namespace FarmsteadMap.DAL.Data.Models
+{
+    public class GardenBed
+    {
+        public double X { get; set; }
+        public double Y { get; set; }
+        public double Width { get; set; }
+        public double Height { get; set; }
+        public string Shape { get; set; }
+    }
+}
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3

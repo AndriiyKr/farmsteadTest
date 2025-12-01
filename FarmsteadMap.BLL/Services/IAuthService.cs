@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿// <copyright file="IAuthService.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
@@ -27,3 +28,20 @@ namespace FarmsteadMap.BLL.Services
         Task<LoginResponseDTO> LoginAsync(LoginRequestDTO dto);
     }
 }
+=======
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using FarmsteadMap.BLL.Data.DTO;
+
+namespace FarmsteadMap.BLL.Services
+{
+    public interface IAuthService
+    {
+        Task<RegisterResponseDTO> RegisterAsync(RegisterRequestDTO dto);
+        Task<LoginResponseDTO> LoginAsync(LoginRequestDTO dto);
+    }
+}
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3

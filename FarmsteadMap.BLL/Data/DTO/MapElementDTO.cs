@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿// <copyright file="MapElementDTO.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
@@ -45,3 +46,18 @@ namespace FarmsteadMap.BLL.Data.DTO
         required public int Rotation { get; set; }
     }
 }
+=======
+﻿namespace FarmsteadMap.BLL.Data.DTO
+{
+    public class MapElementDTO
+    {
+        public string Type { get; set; }
+        public long ElementId { get; set; }
+        public double X { get; set; }
+        public double Y { get; set; }
+        public double Width { get; set; }
+        public double Height { get; set; }
+        public int Rotation { get; set; }
+    }
+}
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3

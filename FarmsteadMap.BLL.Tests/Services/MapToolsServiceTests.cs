@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿// <copyright file="MapToolsServiceTests.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
@@ -20,6 +21,20 @@ namespace FarmsteadMap.BLL.Tests.Services
         /// <summary>
         /// Tests that AddTreeElement creates an element with correct properties.
         /// </summary>
+=======
+﻿using Xunit;
+using Moq;
+using FarmsteadMap.BLL.Services;
+using FarmsteadMap.DAL.Repositories;
+using FarmsteadMap.BLL.Data.DTO;
+using FarmsteadMap.BLL.Services;
+
+namespace FarmsteadMap.BLL.Tests.Services
+{
+    public class MapToolsServiceTests
+    {
+        // Тести для дерев (вже є)
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         [Fact]
         public void AddTreeElement_CreatesElementWithCorrectProperties()
         {
@@ -40,9 +55,13 @@ namespace FarmsteadMap.BLL.Tests.Services
             Assert.Equal(50, result.Height);
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Tests that AddVegetableElement creates an element with correct properties.
         /// </summary>
+=======
+        // НОВІ ТЕСТИ ДЛЯ ОВОЧІВ
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         [Fact]
         public void AddVegetableElement_CreatesElementWithCorrectProperties()
         {
@@ -63,9 +82,13 @@ namespace FarmsteadMap.BLL.Tests.Services
             Assert.Equal(30, result.Height);
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Tests that AddFlowerElement creates an element with correct properties.
         /// </summary>
+=======
+        // НОВІ ТЕСТИ ДЛЯ КВІТІВ
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         [Fact]
         public void AddFlowerElement_CreatesElementWithCorrectProperties()
         {
@@ -86,10 +109,14 @@ namespace FarmsteadMap.BLL.Tests.Services
             Assert.Equal(20, result.Height);
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Tests that AddVegetableElementWithValidation returns the element when validation passes.
         /// </summary>
         /// <returns>A task representing the asynchronous unit test.</returns>
+=======
+        // Тести для валідації овочів
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         [Fact]
         public async Task AddVegetableElementWithValidation_ReturnsElement_WhenValidationPasses()
         {
@@ -97,7 +124,11 @@ namespace FarmsteadMap.BLL.Tests.Services
             var repoMock = new Mock<IMapRepository>();
             var compatMock = new Mock<ICompatibilityService>();
             compatMock.Setup(c => c.ValidateElementPlacementAsync(It.IsAny<MapElementDTO>(), It.IsAny<List<MapElementDTO>>()))
+<<<<<<< HEAD
                       .ReturnsAsync(new BaseResponseDTO<bool> { Success = true, Data = true });
+=======
+                     .ReturnsAsync(new BaseResponseDTO<bool> { Success = true, Data = true });
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
 
             var service = new MapToolsService(repoMock.Object, compatMock.Object);
             var existingElements = new List<MapElementDTO>();
@@ -108,6 +139,7 @@ namespace FarmsteadMap.BLL.Tests.Services
             // Assert
             Assert.True(result.Success);
             Assert.NotNull(result.Data);
+<<<<<<< HEAD
             Assert.Equal("veg", result.Data!.Type);
         }
 
@@ -115,6 +147,11 @@ namespace FarmsteadMap.BLL.Tests.Services
         /// Tests that AddVegetableElementWithValidation returns an error when validation fails.
         /// </summary>
         /// <returns>A task representing the asynchronous unit test.</returns>
+=======
+            Assert.Equal("veg", result.Data.Type);
+        }
+
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         [Fact]
         public async Task AddVegetableElementWithValidation_ReturnsError_WhenValidationFails()
         {
@@ -122,7 +159,11 @@ namespace FarmsteadMap.BLL.Tests.Services
             var repoMock = new Mock<IMapRepository>();
             var compatMock = new Mock<ICompatibilityService>();
             compatMock.Setup(c => c.ValidateElementPlacementAsync(It.IsAny<MapElementDTO>(), It.IsAny<List<MapElementDTO>>()))
+<<<<<<< HEAD
                       .ReturnsAsync(new BaseResponseDTO<bool> { Success = false, Error = "Несумісні овочі" });
+=======
+                     .ReturnsAsync(new BaseResponseDTO<bool> { Success = false, Error = "Несумісні овочі" });
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
 
             var service = new MapToolsService(repoMock.Object, compatMock.Object);
             var existingElements = new List<MapElementDTO>();
@@ -135,9 +176,13 @@ namespace FarmsteadMap.BLL.Tests.Services
             Assert.Equal("Несумісні овочі", result.Error);
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Tests that AddMeasurement creates a line with correct properties.
         /// </summary>
+=======
+        // Тести для вимірювань
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         [Fact]
         public void AddMeasurement_CreatesLineWithCorrectProperties()
         {
@@ -154,12 +199,19 @@ namespace FarmsteadMap.BLL.Tests.Services
             Assert.Equal(0, result.StartY);
             Assert.Equal(10, result.EndX);
             Assert.Equal(10, result.EndY);
+<<<<<<< HEAD
             Assert.True(result.Length > 0);
         }
 
         /// <summary>
         /// Tests that AddGardenBed creates a bed with correct properties.
         /// </summary>
+=======
+            Assert.True(result.Length > 0); // Довжина має бути позитивною
+        }
+
+        // Тести для грядок
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         [Fact]
         public void AddGardenBed_CreatesBedWithCorrectProperties()
         {
@@ -179,9 +231,12 @@ namespace FarmsteadMap.BLL.Tests.Services
             Assert.Equal("rectangle", result.Shape);
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Tests that AddGardenBed creates a bed with the default shape when none is specified.
         /// </summary>
+=======
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         [Fact]
         public void AddGardenBed_CreatesBedWithDefaultShape()
         {
@@ -191,6 +246,7 @@ namespace FarmsteadMap.BLL.Tests.Services
             var service = new MapToolsService(repoMock.Object, compatMock.Object);
 
             // Act
+<<<<<<< HEAD
             var result = service.AddGardenBed(10, 20, 100, 50);
 
             // Assert
@@ -200,6 +256,15 @@ namespace FarmsteadMap.BLL.Tests.Services
         /// <summary>
         /// Tests that ValidateElementPlacement returns an error when elements overlap.
         /// </summary>
+=======
+            var result = service.AddGardenBed(10, 20, 100, 50); // Без вказання shape
+
+            // Assert
+            Assert.Equal("rectangle", result.Shape); // Має бути значення за замовчуванням
+        }
+
+        // Тести для перевірки перекриття
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         [Fact]
         public void ValidateElementPlacement_ReturnsError_WhenOverlapExists()
         {
@@ -208,6 +273,7 @@ namespace FarmsteadMap.BLL.Tests.Services
             var compatMock = new Mock<ICompatibilityService>();
             var service = new MapToolsService(repoMock.Object, compatMock.Object);
 
+<<<<<<< HEAD
             // Fix: Added Rotation (required)
             var element = new MapElementDTO
             {
@@ -233,6 +299,12 @@ namespace FarmsteadMap.BLL.Tests.Services
                     Height = 50,
                     Rotation = 0,
                 },
+=======
+            var element = new MapElementDTO { X = 0, Y = 0, Width = 50, Height = 50 };
+            var existingElements = new List<MapElementDTO>
+            {
+                new MapElementDTO { X = 25, Y = 25, Width = 50, Height = 50 } // Перекриваються
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
             };
 
             // Act
@@ -243,9 +315,13 @@ namespace FarmsteadMap.BLL.Tests.Services
             Assert.Equal("Елементи перекриваються", result.Error);
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Tests that ValidateElementPlacement returns true when different types do not overlap.
         /// </summary>
+=======
+        // Тести для різних типів елементів
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         [Fact]
         public void ValidateElementPlacement_ReturnsTrue_WhenDifferentTypesNoOverlap()
         {
@@ -254,6 +330,7 @@ namespace FarmsteadMap.BLL.Tests.Services
             var compatMock = new Mock<ICompatibilityService>();
             var service = new MapToolsService(repoMock.Object, compatMock.Object);
 
+<<<<<<< HEAD
             // Fix: Added Rotation (required)
             var treeElement = new MapElementDTO
             {
@@ -277,6 +354,10 @@ namespace FarmsteadMap.BLL.Tests.Services
                 Height = 30,
                 Rotation = 0,
             };
+=======
+            var treeElement = new MapElementDTO { Type = "tree", X = 0, Y = 0, Width = 50, Height = 50 };
+            var vegElement = new MapElementDTO { Type = "veg", X = 60, Y = 60, Width = 30, Height = 30 };
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
 
             var existingElements = new List<MapElementDTO> { treeElement };
 
@@ -288,9 +369,13 @@ namespace FarmsteadMap.BLL.Tests.Services
             Assert.True(result.Data);
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Tests that CalculateDistance returns the correct distance between two points.
         /// </summary>
+=======
+        // Існуючі тести (залишаються)
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         [Fact]
         public void CalculateDistance_ReturnsCorrectDistance()
         {
@@ -303,12 +388,18 @@ namespace FarmsteadMap.BLL.Tests.Services
             var distance = service.CalculateDistance(0, 0, 3, 4);
 
             // Assert
+<<<<<<< HEAD
             Assert.Equal(5, distance);
         }
 
         /// <summary>
         /// Tests that CalculateDistance returns zero when the points are the same.
         /// </summary>
+=======
+            Assert.Equal(5, distance); // √(3² + 4²) = 5
+        }
+
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         [Fact]
         public void CalculateDistance_ReturnsZero_WhenSamePoint()
         {

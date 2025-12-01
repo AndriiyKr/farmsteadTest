@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿// <copyright file="MapServiceTests.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
@@ -35,11 +36,35 @@ namespace FarmsteadMap.BLL.Tests.Services
         /// Tests that GetMapAsync returns a map when it exists.
         /// </summary>
         /// <returns>A task representing the asynchronous unit test.</returns>
+=======
+﻿using Xunit;
+using Moq;
+using AutoMapper;
+using FarmsteadMap.BLL.Services;
+using FarmsteadMap.DAL.Data.Models;
+using FarmsteadMap.DAL.Repositories;
+using FarmsteadMap.BLL.Data.DTO;
+using FarmsteadMap.BLL.Profiles;
+
+namespace FarmsteadMap.BLL.Tests.Services
+{
+    public class MapServiceTests
+    {
+        private readonly IMapper _mapper;
+
+        public MapServiceTests()
+        {
+            var config = new MapperConfiguration(cfg => cfg.AddProfile<AutoMapperProfile>());
+            _mapper = config.CreateMapper();
+        }
+
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         [Fact]
         public async Task GetMapAsync_ReturnsMap_WhenMapExists()
         {
             // Arrange
             var mapId = 1L;
+<<<<<<< HEAD
             var map = new Map
             {
                 Id = mapId,
@@ -52,6 +77,13 @@ namespace FarmsteadMap.BLL.Tests.Services
             repoMock.Setup(r => r.GetByIdAsync(mapId)).ReturnsAsync(map);
 
             var service = new MapService(repoMock.Object, this.mapper);
+=======
+            var map = new Map { Id = mapId, Name = "Test Map", UserId = 1 };
+            var repoMock = new Mock<IMapRepository>();
+            repoMock.Setup(r => r.GetByIdAsync(mapId)).ReturnsAsync(map);
+
+            var service = new MapService(repoMock.Object, _mapper);
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
 
             // Act
             var result = await service.GetMapAsync(mapId);
@@ -59,6 +91,7 @@ namespace FarmsteadMap.BLL.Tests.Services
             // Assert
             Assert.True(result.Success);
             Assert.NotNull(result.Data);
+<<<<<<< HEAD
             Assert.Equal(mapId, result.Data!.Id);
             Assert.Equal("Test Map", result.Data!.Name);
         }
@@ -67,15 +100,27 @@ namespace FarmsteadMap.BLL.Tests.Services
         /// Tests that GetMapAsync returns an error when the map is not found.
         /// </summary>
         /// <returns>A task representing the asynchronous unit test.</returns>
+=======
+            Assert.Equal(mapId, result.Data.Id);
+            Assert.Equal("Test Map", result.Data.Name);
+        }
+
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         [Fact]
         public async Task GetMapAsync_ReturnsError_WhenMapNotFound()
         {
             // Arrange
             var mapId = 999L;
             var repoMock = new Mock<IMapRepository>();
+<<<<<<< HEAD
             repoMock.Setup(r => r.GetByIdAsync(mapId)).ReturnsAsync((Map?)null);
 
             var service = new MapService(repoMock.Object, this.mapper);
+=======
+            repoMock.Setup(r => r.GetByIdAsync(mapId)).ReturnsAsync((Map)null);
+
+            var service = new MapService(repoMock.Object, _mapper);
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
 
             // Act
             var result = await service.GetMapAsync(mapId);
@@ -85,10 +130,13 @@ namespace FarmsteadMap.BLL.Tests.Services
             Assert.Equal("Мапу не знайдено", result.Error);
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Tests that GetUserMapsAsync returns a list of maps for a user.
         /// </summary>
         /// <returns>A task representing the asynchronous unit test.</returns>
+=======
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         [Fact]
         public async Task GetUserMapsAsync_ReturnsMaps_WhenUserHasMaps()
         {
@@ -96,13 +144,22 @@ namespace FarmsteadMap.BLL.Tests.Services
             var userId = 1L;
             var maps = new List<Map>
             {
+<<<<<<< HEAD
                 new Map { Id = 1, Name = "Map 1", UserId = userId, MapJson = "{}" },
                 new Map { Id = 2, Name = "Map 2", UserId = userId, MapJson = "{}" },
+=======
+                new Map { Id = 1, Name = "Map 1", UserId = userId },
+                new Map { Id = 2, Name = "Map 2", UserId = userId }
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
             };
             var repoMock = new Mock<IMapRepository>();
             repoMock.Setup(r => r.GetByUserIdAsync(userId)).ReturnsAsync(maps);
 
+<<<<<<< HEAD
             var service = new MapService(repoMock.Object, this.mapper);
+=======
+            var service = new MapService(repoMock.Object, _mapper);
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
 
             // Act
             var result = await service.GetUserMapsAsync(userId);
@@ -110,6 +167,7 @@ namespace FarmsteadMap.BLL.Tests.Services
             // Assert
             Assert.True(result.Success);
             Assert.NotNull(result.Data);
+<<<<<<< HEAD
             Assert.Equal(2, result.Data!.Count);
         }
 
@@ -117,12 +175,18 @@ namespace FarmsteadMap.BLL.Tests.Services
         /// Tests that GetMapElementsAsync returns all map elements correctly mapped.
         /// </summary>
         /// <returns>A task representing the asynchronous unit test.</returns>
+=======
+            Assert.Equal(2, result.Data.Count);
+        }
+
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         [Fact]
         public async Task GetMapElementsAsync_ReturnsAllElements()
         {
             // Arrange
             var treeSorts = new List<TreeSort>
             {
+<<<<<<< HEAD
                 new TreeSort
                 {
                     Id = 1,
@@ -164,6 +228,17 @@ namespace FarmsteadMap.BLL.Tests.Services
                     GroundType = "Universal",
                     Image = "rose.png",
                 },
+=======
+                new TreeSort { Id = 1, Name = "Apple", Tree = new Tree { Name = "Apple Tree", Image = "apple.jpg" } }
+            };
+            var vegSorts = new List<VegSort>
+            {
+                new VegSort { Id = 1, Name = "Tomato", Vegetable = new Vegetable { Name = "Tomato" } }
+            };
+            var flowers = new List<Flower>
+            {
+                new Flower { Id = 1, Name = "Rose" }
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
             };
 
             var repoMock = new Mock<IMapRepository>();
@@ -171,7 +246,11 @@ namespace FarmsteadMap.BLL.Tests.Services
             repoMock.Setup(r => r.GetVegSortsAsync()).ReturnsAsync(vegSorts);
             repoMock.Setup(r => r.GetFlowersAsync()).ReturnsAsync(flowers);
 
+<<<<<<< HEAD
             var service = new MapService(repoMock.Object, this.mapper);
+=======
+            var service = new MapService(repoMock.Object, _mapper);
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
 
             // Act
             var result = await service.GetMapElementsAsync();
@@ -179,6 +258,7 @@ namespace FarmsteadMap.BLL.Tests.Services
             // Assert
             Assert.True(result.Success);
             Assert.NotNull(result.Data);
+<<<<<<< HEAD
             Assert.Single(result.Data!.TreeSorts);
             Assert.Single(result.Data!.VegSorts);
             Assert.Single(result.Data!.Flowers);
@@ -188,6 +268,13 @@ namespace FarmsteadMap.BLL.Tests.Services
         /// Tests that CreateMapAsync returns the map ID when creation is successful.
         /// </summary>
         /// <returns>A task representing the asynchronous unit test.</returns>
+=======
+            Assert.Single(result.Data.TreeSorts);
+            Assert.Single(result.Data.VegSorts);
+            Assert.Single(result.Data.Flowers);
+        }
+
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         [Fact]
         public async Task CreateMapAsync_ReturnsMapId_WhenSuccessful()
         {
@@ -198,13 +285,21 @@ namespace FarmsteadMap.BLL.Tests.Services
                 Name = "New Map",
                 IsPrivate = false,
                 UserId = 1,
+<<<<<<< HEAD
                 MapData = new MapDataDTO { Name = "New Map" },
+=======
+                MapData = new MapDataDTO { Name = "New Map" }
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
             };
 
             var repoMock = new Mock<IMapRepository>();
             repoMock.Setup(r => r.CreateAsync(It.IsAny<Map>())).ReturnsAsync(mapId);
 
+<<<<<<< HEAD
             var service = new MapService(repoMock.Object, this.mapper);
+=======
+            var service = new MapService(repoMock.Object, _mapper);
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
 
             // Act
             var result = await service.CreateMapAsync(createDto);
@@ -214,14 +309,18 @@ namespace FarmsteadMap.BLL.Tests.Services
             Assert.Equal(mapId, result.Data);
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Tests that UpdateMapAsync returns true when the map is successfully updated.
         /// </summary>
         /// <returns>A task representing the asynchronous unit test.</returns>
+=======
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         [Fact]
         public async Task UpdateMapAsync_ReturnsTrue_WhenMapExists()
         {
             // Arrange
+<<<<<<< HEAD
             // Fix: Added IsPrivate and MapData (required in DTO)
             var updateDto = new UpdateMapDTO
             {
@@ -238,12 +337,20 @@ namespace FarmsteadMap.BLL.Tests.Services
                 MapJson = "{}",
                 UserId = 1,
             };
+=======
+            var updateDto = new UpdateMapDTO { Id = 1, Name = "Updated Map" };
+            var existingMap = new Map { Id = 1, Name = "Old Map" };
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
 
             var repoMock = new Mock<IMapRepository>();
             repoMock.Setup(r => r.GetByIdAsync(updateDto.Id)).ReturnsAsync(existingMap);
             repoMock.Setup(r => r.UpdateAsync(It.IsAny<Map>())).ReturnsAsync(true);
 
+<<<<<<< HEAD
             var service = new MapService(repoMock.Object, this.mapper);
+=======
+            var service = new MapService(repoMock.Object, _mapper);
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
 
             // Act
             var result = await service.UpdateMapAsync(updateDto);
@@ -253,10 +360,13 @@ namespace FarmsteadMap.BLL.Tests.Services
             Assert.True(result.Data);
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Tests that DeleteMapAsync returns true when the map is successfully deleted.
         /// </summary>
         /// <returns>A task representing the asynchronous unit test.</returns>
+=======
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         [Fact]
         public async Task DeleteMapAsync_ReturnsTrue_WhenMapDeleted()
         {
@@ -265,7 +375,11 @@ namespace FarmsteadMap.BLL.Tests.Services
             var repoMock = new Mock<IMapRepository>();
             repoMock.Setup(r => r.DeleteAsync(mapId)).ReturnsAsync(true);
 
+<<<<<<< HEAD
             var service = new MapService(repoMock.Object, this.mapper);
+=======
+            var service = new MapService(repoMock.Object, _mapper);
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
 
             // Act
             var result = await service.DeleteMapAsync(mapId);

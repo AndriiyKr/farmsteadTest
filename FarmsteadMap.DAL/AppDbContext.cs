@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // <copyright file="AppDbContext.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
@@ -22,11 +23,34 @@ namespace FarmsteadMap.DAL
         /// Initializes a new instance of the <see cref="AppDbContext"/> class.
         /// </summary>
         /// <param name="options">The options for configuring the context.</param>
+=======
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using FarmsteadMap.DAL.Data.Models;
+using System.IO;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+
+namespace FarmsteadMap.DAL
+{
+    public class AppDbContext : DbContext
+    {
+        public DbSet<User> Users => Set<User>();
+        public DbSet<Map> Maps => Set<Map>();
+        public DbSet<Tree> Trees => Set<Tree>();
+        public DbSet<TreeSort> TreeSorts => Set<TreeSort>();
+        public DbSet<Vegetable> Vegetables => Set<Vegetable>();
+        public DbSet<VegSort> VegSorts => Set<VegSort>();
+        public DbSet<Flower> Flowers => Set<Flower>();
+        public DbSet<TreeIncompatibility> TreeIncompatibilities => Set<TreeIncompatibility>();
+        public DbSet<VegIncompatibility> VegIncompatibilities => Set<VegIncompatibility>();
+
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Gets the users table.
         /// </summary>
@@ -87,6 +111,19 @@ namespace FarmsteadMap.DAL
         }
 
         /// <inheritdoc/>
+=======
+        private static DbContextOptions<AppDbContext> GetOptions()
+        {
+            var config = new ConfigurationBuilder()
+                .AddJsonFile(Path.Combine(AppContext.BaseDirectory, "config.json"), optional: false)
+                .Build();
+
+            var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+            optionsBuilder.UseNpgsql(config.GetConnectionString("DefaultConnection"));
+            return optionsBuilder.Options;
+        }
+
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>(entity =>
@@ -104,7 +141,10 @@ namespace FarmsteadMap.DAL
                 entity.Property(e => e.IsActive).HasColumnName("is_Active").HasDefaultValue(true);
                 entity.Property(e => e.Avatar).HasColumnName("avatar").HasMaxLength(100);
             });
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
             modelBuilder.Entity<Map>(entity =>
             {
                 entity.ToTable("maps");
@@ -213,6 +253,10 @@ namespace FarmsteadMap.DAL
                     .HasForeignKey(e => e.Tree2Id)
                     .HasConstraintName("incompatibility_tree2_fk")
                     .OnDelete(DeleteBehavior.Cascade);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
             });
 
             // VegIncompatibility configuration
@@ -235,6 +279,7 @@ namespace FarmsteadMap.DAL
                     .HasForeignKey(e => e.Veg2Id)
                     .HasConstraintName("incompatibility_veg2_fk")
                     .OnDelete(DeleteBehavior.Cascade);
+<<<<<<< HEAD
             });
         }
 
@@ -247,11 +292,30 @@ namespace FarmsteadMap.DAL
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
             optionsBuilder.UseNpgsql(config.GetConnectionString("DefaultConnection"));
             return optionsBuilder.Options;
+=======
+
+            });
+        }
+        public override int SaveChanges()
+        {
+            ValidateIncompatibilityConstraints();
+            return base.SaveChanges();
+        }
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            ValidateIncompatibilityConstraints();
+            return await base.SaveChangesAsync(cancellationToken);
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         }
 
         private void ValidateIncompatibilityConstraints()
         {
+<<<<<<< HEAD
             var vegEntries = this.ChangeTracker.Entries<VegIncompatibility>()
+=======
+            var vegEntries = ChangeTracker.Entries<VegIncompatibility>()
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
                 .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified);
 
             foreach (var entry in vegEntries)
@@ -263,7 +327,11 @@ namespace FarmsteadMap.DAL
                 }
             }
 
+<<<<<<< HEAD
             var treeEntries = this.ChangeTracker.Entries<TreeIncompatibility>()
+=======
+            var treeEntries = ChangeTracker.Entries<TreeIncompatibility>()
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
                 .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified);
 
             foreach (var entry in treeEntries)

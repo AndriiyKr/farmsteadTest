@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿// <copyright file="CreateMapDTO.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
@@ -30,3 +31,17 @@ namespace FarmsteadMap.BLL.Data.DTO
         required public MapDataDTO MapData { get; set; }
     }
 }
+=======
+﻿using FarmsteadMap.BLL.Data.DTO;
+
+namespace FarmsteadMap.BLL.Data.DTO
+{
+    public class CreateMapDTO
+    {
+        public string Name { get; set; }
+        public bool IsPrivate { get; set; }
+        public long UserId { get; set; }
+        public MapDataDTO MapData { get; set; }
+    }
+}
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3

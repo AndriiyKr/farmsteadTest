@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // <copyright file="RegisterRequestDTO.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
@@ -47,6 +48,19 @@ namespace FarmsteadMap.BLL.Data.DTO
         /// <summary>
         /// Gets or sets a value indicating whether the personal data processing policy is accepted.
         /// </summary>
+=======
+namespace FarmsteadMap.BLL.Data.DTO
+{
+    public class RegisterRequestDTO
+    {
+        public string Email { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string ConfirmPassword { get; set; }
+        public string? Firstname { get; set; }
+        public string? Lastname { get; set; }
+        public bool TermsAccepted { get; set; }
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         public bool PersonalDataAccepted { get; set; }
     }
 }

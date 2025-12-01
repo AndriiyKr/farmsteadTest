@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿// <copyright file="App.xaml.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
@@ -25,6 +26,25 @@ namespace FarmsteadMap.WPF
         /// Initializes a new instance of the <see cref="App"/> class.
         /// Налаштовує хост програми (конфігурацію, сервіси, DI).
         /// </summary>
+=======
+﻿using FarmsteadMap.BLL.Profiles;
+using FarmsteadMap.BLL.Services;
+using FarmsteadMap.DAL;
+using FarmsteadMap.DAL.Repositories;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using System.IO;
+using System.Windows;
+using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
+
+namespace FarmsteadMap.WPF
+{
+    public partial class App : Application
+    {
+        public static IHost? AppHost { get; private set; }
+
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         public App()
         {
             AppHost = Host.CreateDefaultBuilder()
@@ -37,7 +57,11 @@ namespace FarmsteadMap.WPF
                 {
                     services.AddDbContext<AppDbContext>(options =>
                     {
+<<<<<<< HEAD
                         string connectionString = hostContext.Configuration.GetConnectionString("DefaultConnection") !;
+=======
+                        string connectionString = hostContext.Configuration.GetConnectionString("DefaultConnection");
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
                         options.UseNpgsql(connectionString);
                     });
 
@@ -45,18 +69,27 @@ namespace FarmsteadMap.WPF
 
                     services.AddScoped<IUserRepository, UserRepository>();
                     services.AddScoped<IAuthService, AuthService>();
+<<<<<<< HEAD
                     services.AddScoped<IUserService, UserService>();
                     services.AddScoped<IUserAccountService, UserAccountService>();
+=======
+
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
                     services.AddSingleton<MainWindow>();
                     services.AddTransient<LoginView>();
                     services.AddTransient<MapsMenuView>();
                     services.AddTransient<NoConnectionView>();
                     services.AddTransient<UserMapView>();
                     services.AddTransient<SettingsView>();
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
                 })
                 .Build();
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Gets the static instance of the configured program host (IHost).
         /// Отримує статичний екземпляр налаштованого хоста програми (IHost).
@@ -67,11 +100,17 @@ namespace FarmsteadMap.WPF
         /// Обробник події запуску програми.
         /// </summary>
         /// <param name="e">Аргументи запуску.</param>
+=======
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         protected override async void OnStartup(StartupEventArgs e)
         {
             await AppHost!.StartAsync();
 
+<<<<<<< HEAD
             SplashScreenWindow splashScreen = new ();
+=======
+            SplashScreenWindow splashScreen = new SplashScreenWindow();
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
             splashScreen.Show();
 
             splashScreen.Closed += (s, args) =>
@@ -87,24 +126,38 @@ namespace FarmsteadMap.WPF
                 }
                 catch (Exception ex)
                 {
+<<<<<<< HEAD
                     MessageBox.Show(
                         $"Критична помилка при запуску MainWindow:\n\n{ex.Message}\n\nПеревірте InnerException: {ex.InnerException?.Message}",
                         "Помилка Dependency Injection",
                         MessageBoxButton.OK,
                         MessageBoxImage.Error);
+=======
+                    MessageBox.Show($"Критична помилка при запуску MainWindow:\n\n{ex.Message}\n\nПеревірте InnerException: {ex.InnerException?.Message}",
+                                    "Помилка Dependency Injection",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Error);
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
                     System.Diagnostics.Debug.WriteLine(ex);
                 }
             };
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Обробник події виходу з програми.
         /// </summary>
         /// <param name="e">Аргументи виходу.</param>
+=======
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         protected override async void OnExit(ExitEventArgs e)
         {
             await AppHost!.StopAsync();
             base.OnExit(e);
         }
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
 }

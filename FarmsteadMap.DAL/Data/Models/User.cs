@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // <copyright file="User.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
@@ -52,6 +53,20 @@ namespace FarmsteadMap.DAL.Data.Models
         /// <summary>
         /// Gets or sets the path or URL to the user's avatar image.
         /// </summary>
+=======
+namespace FarmsteadMap.DAL.Data.Models
+{
+    public class User
+    {
+        public long Id { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string Username { get; set; }
+        public bool IsSuperuser { get; set; }
+        public string? Firstname { get; set; }
+        public string? Lastname { get; set; }
+        public bool IsActive { get; set; }
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         public string? Avatar { get; set; }
     }
 }

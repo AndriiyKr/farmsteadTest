@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿// <copyright file="PointDTO.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
@@ -31,3 +32,20 @@ namespace FarmsteadMap.BLL.Data.DTO
         public double Y { get; set; }
     }
 }
+=======
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FarmsteadMap.BLL.Data.DTO
+{
+    public class PointDTO
+    {
+        public double X { get; set; }
+        public double Y { get; set; }
+        public PointDTO(double x, double y) { X = x; Y = y; }
+    }
+}
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿// <copyright file="AuthServiceTests.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
@@ -23,10 +24,37 @@ namespace FarmsteadMap.BLL.Tests.Services
         /// Tests that registration fails when a user with the same email already exists.
         /// </summary>
         /// <returns>A task representing the asynchronous unit test.</returns>
+=======
+﻿using Xunit;
+using Moq;
+using System.Threading.Tasks;
+using FarmsteadMap.BLL.Services;
+using FarmsteadMap.DAL.Data.Models;
+using FarmsteadMap.DAL.Repositories;
+using FarmsteadMap.BLL.Data.DTO;
+using FarmsteadMap.BLL.Profiles;
+using AutoMapper;
+using FarmsteadMap.DAL;
+
+namespace FarmsteadMap.BLL.Tests.Services
+{
+    public class AuthServiceTests
+    {
+        private IMapper GetMapper()
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile<AutoMapperProfile>();
+            });
+            return config.CreateMapper();
+        }
+
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         [Fact]
         public async Task RegisterAsync_ReturnsFalse_WhenUserExistsByEmail()
         {
             var repoMock = new Mock<IUserRepository>();
+<<<<<<< HEAD
 
             // Fix: CS9035 - Initialize all required fields
             var existingUser = new User
@@ -38,6 +66,9 @@ namespace FarmsteadMap.BLL.Tests.Services
             };
 
             repoMock.Setup(r => r.GetByEmailAsync("test@example.com")).ReturnsAsync(existingUser);
+=======
+            repoMock.Setup(r => r.GetByEmailAsync("test@example.com")).ReturnsAsync(new User());
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
             repoMock.Setup(r => r.GetByUsernameAsync("testuser")).ReturnsAsync((User?)null);
 
             var service = new AuthService(repoMock.Object, GetMapper());
@@ -51,7 +82,11 @@ namespace FarmsteadMap.BLL.Tests.Services
                 Firstname = "John",
                 Lastname = "Doe",
                 TermsAccepted = true,
+<<<<<<< HEAD
                 PersonalDataAccepted = true,
+=======
+                PersonalDataAccepted = true
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
             };
 
             var result = await service.RegisterAsync(dto);
@@ -60,14 +95,18 @@ namespace FarmsteadMap.BLL.Tests.Services
             repoMock.Verify(r => r.AddAsync(It.IsAny<User>()), Times.Never);
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Tests that registration fails when a user with the same username already exists.
         /// </summary>
         /// <returns>A task representing the asynchronous unit test.</returns>
+=======
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         [Fact]
         public async Task RegisterAsync_ReturnsFalse_WhenUserExistsByUsername()
         {
             var repoMock = new Mock<IUserRepository>();
+<<<<<<< HEAD
 
             // Fix: CS9035 - Initialize all required fields
             var existingUser = new User
@@ -80,6 +119,10 @@ namespace FarmsteadMap.BLL.Tests.Services
 
             repoMock.Setup(r => r.GetByEmailAsync("new@example.com")).ReturnsAsync((User?)null);
             repoMock.Setup(r => r.GetByUsernameAsync("existinguser")).ReturnsAsync(existingUser);
+=======
+            repoMock.Setup(r => r.GetByEmailAsync("new@example.com")).ReturnsAsync((User?)null);
+            repoMock.Setup(r => r.GetByUsernameAsync("existinguser")).ReturnsAsync(new User());
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
 
             var service = new AuthService(repoMock.Object, GetMapper());
 
@@ -92,7 +135,11 @@ namespace FarmsteadMap.BLL.Tests.Services
                 Firstname = "John",
                 Lastname = "Doe",
                 TermsAccepted = true,
+<<<<<<< HEAD
                 PersonalDataAccepted = true,
+=======
+                PersonalDataAccepted = true
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
             };
 
             var result = await service.RegisterAsync(dto);
@@ -101,10 +148,13 @@ namespace FarmsteadMap.BLL.Tests.Services
             repoMock.Verify(r => r.AddAsync(It.IsAny<User>()), Times.Never);
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Tests that registration succeeds and adds a user with the correct properties.
         /// </summary>
         /// <returns>A task representing the asynchronous unit test.</returns>
+=======
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         [Fact]
         public async Task RegisterAsync_AddsUserWithCorrectProperties()
         {
@@ -128,12 +178,17 @@ namespace FarmsteadMap.BLL.Tests.Services
                 Firstname = "John",
                 Lastname = "Doe",
                 TermsAccepted = true,
+<<<<<<< HEAD
                 PersonalDataAccepted = true,
+=======
+                PersonalDataAccepted = true
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
             };
 
             var result = await service.RegisterAsync(dto);
             Assert.True(result.Success);
             Assert.Null(result.Error);
+<<<<<<< HEAD
 
             Assert.NotNull(addedUser);
 
@@ -149,6 +204,16 @@ namespace FarmsteadMap.BLL.Tests.Services
         /// Tests that registration calls AddAsync exactly once when the user is new.
         /// </summary>
         /// <returns>A task representing the asynchronous unit test.</returns>
+=======
+            Assert.NotNull(addedUser);
+            Assert.Equal("new@example.com", addedUser.Email);
+            Assert.Equal("newuser", addedUser.Username);
+            Assert.True(addedUser.IsActive);
+            Assert.NotEqual("password", addedUser.Password); 
+            Assert.True(BCrypt.Net.BCrypt.Verify("password", addedUser.Password));
+        }
+
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         [Fact]
         public async Task RegisterAsync_CallsAddAsyncOnce_WhenUserIsNew()
         {
@@ -167,7 +232,11 @@ namespace FarmsteadMap.BLL.Tests.Services
                 Firstname = "John",
                 Lastname = "Doe",
                 TermsAccepted = true,
+<<<<<<< HEAD
                 PersonalDataAccepted = true,
+=======
+                PersonalDataAccepted = true
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
             };
 
             var result = await service.RegisterAsync(dto);
@@ -176,10 +245,13 @@ namespace FarmsteadMap.BLL.Tests.Services
             repoMock.Verify(r => r.AddAsync(It.IsAny<User>()), Times.Once);
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Tests that registration returns an error when the email format is invalid.
         /// </summary>
         /// <returns>A task representing the asynchronous unit test.</returns>
+=======
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         [Fact]
         public async Task RegisterAsync_ReturnsError_WhenEmailIsInvalid()
         {
@@ -195,7 +267,11 @@ namespace FarmsteadMap.BLL.Tests.Services
                 Firstname = "John",
                 Lastname = "Doe",
                 TermsAccepted = true,
+<<<<<<< HEAD
                 PersonalDataAccepted = true,
+=======
+                PersonalDataAccepted = true
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
             };
 
             var result = await service.RegisterAsync(dto);
@@ -203,10 +279,13 @@ namespace FarmsteadMap.BLL.Tests.Services
             Assert.Equal("Неправильний формат email.", result.Error);
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Tests that registration returns an error when the password is too short.
         /// </summary>
         /// <returns>A task representing the asynchronous unit test.</returns>
+=======
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         [Fact]
         public async Task RegisterAsync_ReturnsError_WhenPasswordIsTooShort()
         {
@@ -222,7 +301,11 @@ namespace FarmsteadMap.BLL.Tests.Services
                 Firstname = "John",
                 Lastname = "Doe",
                 TermsAccepted = true,
+<<<<<<< HEAD
                 PersonalDataAccepted = true,
+=======
+                PersonalDataAccepted = true
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
             };
 
             var result = await service.RegisterAsync(dto);
@@ -230,10 +313,13 @@ namespace FarmsteadMap.BLL.Tests.Services
             Assert.Equal("Пароль має містити щонайменше 6 символів.", result.Error);
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Tests that registration succeeds with valid data.
         /// </summary>
         /// <returns>A task representing the asynchronous unit test.</returns>
+=======
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         [Fact]
         public async Task RegisterAsync_Succeeds_WithValidData()
         {
@@ -251,7 +337,11 @@ namespace FarmsteadMap.BLL.Tests.Services
                 Firstname = "John",
                 Lastname = "Doe",
                 TermsAccepted = true,
+<<<<<<< HEAD
                 PersonalDataAccepted = true,
+=======
+                PersonalDataAccepted = true
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
             };
 
             var result = await service.RegisterAsync(dto);
@@ -260,15 +350,19 @@ namespace FarmsteadMap.BLL.Tests.Services
             repoMock.Verify(r => r.AddAsync(It.IsAny<User>()), Times.Once);
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Tests that login returns a user when credentials are correct.
         /// </summary>
         /// <returns>A task representing the asynchronous unit test.</returns>
+=======
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         [Fact]
         public async Task LoginAsync_ReturnsUser_WhenCredentialsAreCorrect()
         {
             var password = "password";
             var hashed = BCrypt.Net.BCrypt.HashPassword(password);
+<<<<<<< HEAD
 
             // Fix: Initialize required properties
             var user = new User
@@ -279,6 +373,9 @@ namespace FarmsteadMap.BLL.Tests.Services
                 Password = hashed,
                 IsActive = true,
             };
+=======
+            var user = new User { Id = 1, Email = "login@example.com", Username = "loginuser", Password = hashed, IsActive = true };
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
 
             var repoMock = new Mock<IUserRepository>();
             repoMock.Setup(r => r.GetByUsernameAsync("loginuser")).ReturnsAsync(user);
@@ -288,12 +385,17 @@ namespace FarmsteadMap.BLL.Tests.Services
             var dto = new LoginRequestDTO
             {
                 Username = "loginuser",
+<<<<<<< HEAD
                 Password = password,
+=======
+                Password = password
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
             };
 
             var result = await service.LoginAsync(dto);
             Assert.NotNull(result.User);
             Assert.Null(result.Error);
+<<<<<<< HEAD
 
             // Fix CS8602
             Assert.Equal("loginuser", result.User!.Username);
@@ -304,6 +406,12 @@ namespace FarmsteadMap.BLL.Tests.Services
         /// Tests that login returns an error when required fields are empty.
         /// </summary>
         /// <returns>A task representing the asynchronous unit test.</returns>
+=======
+            Assert.Equal("loginuser", result.User.Username);
+            Assert.Equal("login@example.com", result.User.Email);
+        }
+
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         [Fact]
         public async Task LoginAsync_ReturnsError_WhenFieldsAreEmpty()
         {
@@ -312,8 +420,13 @@ namespace FarmsteadMap.BLL.Tests.Services
 
             var dto = new LoginRequestDTO
             {
+<<<<<<< HEAD
                 Username = string.Empty,
                 Password = string.Empty,
+=======
+                Username = "",
+                Password = ""
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
             };
 
             var result = await service.LoginAsync(dto);
@@ -321,10 +434,13 @@ namespace FarmsteadMap.BLL.Tests.Services
             Assert.Equal("Ім'я користувача є обов'язковим.", result.Error);
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Tests that login returns an error when the user is not found.
         /// </summary>
         /// <returns>A task representing the asynchronous unit test.</returns>
+=======
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         [Fact]
         public async Task LoginAsync_ReturnsError_WhenUserNotFound()
         {
@@ -335,7 +451,11 @@ namespace FarmsteadMap.BLL.Tests.Services
             var dto = new LoginRequestDTO
             {
                 Username = "nouser",
+<<<<<<< HEAD
                 Password = "password123",
+=======
+                Password = "password123"
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
             };
 
             var result = await service.LoginAsync(dto);
@@ -343,6 +463,7 @@ namespace FarmsteadMap.BLL.Tests.Services
             Assert.Equal("Користувача не знайдено", result.Error);
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Tests that login returns an error when the password is incorrect.
         /// </summary>
@@ -360,6 +481,12 @@ namespace FarmsteadMap.BLL.Tests.Services
                 IsActive = true,
             };
 
+=======
+        [Fact]
+        public async Task LoginAsync_ReturnsError_WhenPasswordIsWrong()
+        {
+            var user = new User { Email = "user@example.com", Username = "user", Password = BCrypt.Net.BCrypt.HashPassword("password123"), IsActive = true };
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
             var repoMock = new Mock<IUserRepository>();
             repoMock.Setup(r => r.GetByUsernameAsync("user")).ReturnsAsync(user);
             var service = new AuthService(repoMock.Object, GetMapper());
@@ -367,7 +494,11 @@ namespace FarmsteadMap.BLL.Tests.Services
             var dto = new LoginRequestDTO
             {
                 Username = "user",
+<<<<<<< HEAD
                 Password = "wrongpassword",
+=======
+                Password = "wrongpassword"
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
             };
 
             var result = await service.LoginAsync(dto);
@@ -375,6 +506,7 @@ namespace FarmsteadMap.BLL.Tests.Services
             Assert.Equal("Неправильний логін або пароль", result.Error);
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Tests that login succeeds with valid data.
         /// </summary>
@@ -392,6 +524,12 @@ namespace FarmsteadMap.BLL.Tests.Services
                 IsActive = true,
             };
 
+=======
+        [Fact]
+        public async Task LoginAsync_Succeeds_WithValidData()
+        {
+            var user = new User { Id = 2, Email = "user@example.com", Username = "user", Password = BCrypt.Net.BCrypt.HashPassword("password123"), IsActive = true };
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
             var repoMock = new Mock<IUserRepository>();
             repoMock.Setup(r => r.GetByUsernameAsync("user")).ReturnsAsync(user);
             var service = new AuthService(repoMock.Object, GetMapper());
@@ -399,12 +537,17 @@ namespace FarmsteadMap.BLL.Tests.Services
             var dto = new LoginRequestDTO
             {
                 Username = "user",
+<<<<<<< HEAD
                 Password = "password123",
+=======
+                Password = "password123"
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
             };
 
             var result = await service.LoginAsync(dto);
             Assert.NotNull(result.User);
             Assert.Null(result.Error);
+<<<<<<< HEAD
             Assert.Equal("user", result.User!.Username);
             Assert.Equal("user@example.com", result.User!.Email);
         }
@@ -419,3 +562,11 @@ namespace FarmsteadMap.BLL.Tests.Services
         }
     }
 }
+=======
+            Assert.Equal("user", result.User.Username);
+            Assert.Equal("user@example.com", result.User.Email);
+        }
+    }
+}
+
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3

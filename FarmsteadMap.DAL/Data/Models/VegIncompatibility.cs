@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿// <copyright file="VegIncompatibility.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
@@ -20,3 +21,13 @@ namespace FarmsteadMap.DAL.Data.Models
         public long Veg2Id { get; set; }
     }
 }
+=======
+﻿namespace FarmsteadMap.DAL.Data.Models
+{
+    public class VegIncompatibility
+    {
+        public long Veg1Id { get; set; }
+        public long Veg2Id { get; set; }
+    }
+}
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3

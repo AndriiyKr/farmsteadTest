@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿// <copyright file="MapShortDTO.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
@@ -32,3 +33,15 @@ namespace FarmsteadMap.BLL.Data.DTO
         public DateTime UpdatedAt { get; set; }
     }
 }
+=======
+﻿namespace FarmsteadMap.BLL.Data.DTO
+{
+    public class MapShortDTO
+    {
+        public long Id { get; set; }
+        public string Name { get; set; }
+        public bool IsPrivate { get; set; }
+        public DateTime UpdatedAt { get; set; }
+    }
+}
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3

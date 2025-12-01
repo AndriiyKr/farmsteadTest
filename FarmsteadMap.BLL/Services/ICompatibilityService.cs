@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿// <copyright file="ICompatibilityService.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
@@ -41,6 +42,17 @@ namespace FarmsteadMap.BLL.Services
         /// <param name="element1">The first map element.</param>
         /// <param name="element2">The second map element.</param>
         /// <returns>A response containing the detailed compatibility result.</returns>
+=======
+﻿using FarmsteadMap.BLL.Data.DTO;
+
+namespace FarmsteadMap.BLL.Services
+{
+    public interface ICompatibilityService
+    {
+        Task<BaseResponseDTO<bool>> ValidateElementPlacementAsync(MapElementDTO newElement, List<MapElementDTO> existingElements);
+        Task<BaseResponseDTO<List<long>>> GetIncompatibleTreeIdsAsync(long treeId);
+        Task<BaseResponseDTO<List<long>>> GetIncompatibleVegIdsAsync(long vegId);
+>>>>>>> 6a304175c57de642982c922e554039d953aa8cb3
         Task<BaseResponseDTO<CompatibilityResultDTO>> CheckCompatibilityAsync(MapElementDTO element1, MapElementDTO element2);
     }
 }
