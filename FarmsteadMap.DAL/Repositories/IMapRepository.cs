@@ -59,13 +59,13 @@ namespace FarmsteadMap.DAL.Repositories
         /// Retrieves all available tree sorts.
         /// </summary>
         /// <returns>A list of <see cref="TreeSort"/> entities.</returns>
-        Task<List<TreeSort>> GetTreeSortsAsync();
+        Task<List<TreeSort>> GetTreeSortsAsync(long treeId);
 
         /// <summary>
         /// Retrieves all available vegetable sorts.
         /// </summary>
         /// <returns>A list of <see cref="VegSort"/> entities.</returns>
-        Task<List<VegSort>> GetVegSortsAsync();
+        Task<List<VegSort>> GetVegSortsAsync(long vegId);
 
         /// <summary>
         /// Retrieves all available flowers.

@@ -287,7 +287,7 @@ namespace FarmsteadMap.WPF
 
         private void RestoreScene(MapScene scene)
         {
-            // Відновлення ландшафту
+            // 1. Відновлення ландшафту (Без змін)
             foreach (var item in scene.Landscape)
             {
                 var points = new PointCollection(item.Points);
@@ -326,28 +326,30 @@ namespace FarmsteadMap.WPF
                 }
             }
 
-            // Відновлення об'єктів
+            // 2. Відновлення об'єктів (ВИПРАВЛЕНО: Жорстка прив'язка до файлів)
             foreach (var obj in scene.Objects)
             {
-                // Спроба знайти зображення за типом/ID
-                string imagePath = "/Images/logo.png";
+                // Визначаємо файл за типом, ігноруючи базу
+                string fixedImageName;
+                switch (obj.Type)
+                {
+                    case "tree":
+                        fixedImageName = "tree.png";
+                        break;
+                    case "flower":
+                        fixedImageName = "flower.png";
+                        break;
+                    case "veg":
+                        fixedImageName = "vegetables.png";
+                        break;
+                    default:
+                        fixedImageName = "logo.png";
+                        break;
+                }
 
-                // Простий пошук в завантажених елементах для відновлення картинки
-                if (obj.Type == "tree" && _mapElements.Trees != null)
-                {
-                    var t = _mapElements.Trees.FirstOrDefault(x => x.Id == obj.DbId);
-                    if (t != null) imagePath = $"/Images/Plants/{t.Image}";
-                }
-                else if (obj.Type == "veg" && _mapElements.Vegetables != null)
-                {
-                    var v = _mapElements.Vegetables.FirstOrDefault(x => x.Id == obj.DbId);
-                    if (v != null) imagePath = $"/Images/Plants/{v.Image}";
-                }
-                else if (obj.Type == "flower" && _mapElements.Flowers != null)
-                {
-                    var f = _mapElements.Flowers.FirstOrDefault(x => x.Id == obj.DbId);
-                    if (f != null) imagePath = $"/Images/Plants/{f.Image}";
-                }
+                // Формуємо абсолютний шлях
+                string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+                string fullPath = System.IO.Path.Combine(baseDir, "Images", "Plants", fixedImageName);
 
                 var img = new Image
                 {
@@ -355,13 +357,24 @@ namespace FarmsteadMap.WPF
                     Height = obj.Height > 0 ? obj.Height : PixelsPerMeter,
                 };
 
-                // Виправлена ініціалізація BitmapImage
+                // Пробуємо завантажити картинку
                 try
                 {
-                    img.Source = new BitmapImage(new Uri(imagePath, UriKind.RelativeOrAbsolute));
+                    if (File.Exists(fullPath))
+                    {
+                        img.Source = new BitmapImage(new Uri(fullPath, UriKind.Absolute));
+                    }
+                    else
+                    {
+                        // Якщо файлу немає, пробуємо логотип або пустишку
+                        string logoPath = System.IO.Path.Combine(baseDir, "Images", "logo.png");
+                        if (File.Exists(logoPath))
+                            img.Source = new BitmapImage(new Uri(logoPath, UriKind.Absolute));
+                    }
                 }
                 catch { }
 
+                // Відновлюємо DTO для логіки
                 img.Tag = new MapElementDTO
                 {
                     ElementId = obj.DbId,
@@ -378,14 +391,16 @@ namespace FarmsteadMap.WPF
                 ObjectCanvas.Children.Add(img);
             }
 
-            // Відновлення камери
+            // 3. Відновлення камери (Без змін)
             if (scene.Viewport != null)
             {
                 _currentZoom = scene.Viewport.Zoom;
                 if (_currentZoom < MinZoom) _currentZoom = MinZoom;
+
                 CanvasScaleTransform.ScaleX = _currentZoom;
                 CanvasScaleTransform.ScaleY = _currentZoom;
                 UpdateScaleUI();
+
                 EditorScrollViewer.UpdateLayout();
                 EditorScrollViewer.ScrollToHorizontalOffset(scene.Viewport.OffsetX);
                 EditorScrollViewer.ScrollToVerticalOffset(scene.Viewport.OffsetY);
@@ -435,47 +450,61 @@ namespace FarmsteadMap.WPF
         }
 
         // Змінив аргумент з BasePlantDTO на прості типи, щоб уникнути помилки CS1503
-        private void AddPlantButton(long id, string name, string imageName, string type)
+        private void AddPlantButton(long id, string name, string dbImageName, string type)
         {
             var btn = new Button { Style = (Style)FindResource("TextureButtonStyle"), ToolTip = name };
 
-            // 1. Формуємо абсолютний шлях до файлу
-            string baseDir = AppDomain.CurrentDomain.BaseDirectory; // Шлях до .exe
-            string relativePath = System.IO.Path.Combine("Images", "Plants", imageName);
+            // 1. ЖОРСТКА ПРИВ'ЯЗКА (Hardcode)
+            string fixedImageName;
+            switch (type)
+            {
+                case "tree":
+                    fixedImageName = "tree.png";
+                    break;
+                case "flower":
+                    fixedImageName = "flower.png";
+                    break;
+                case "veg":
+                    fixedImageName = "vegetables.png"; // Перевірте, чи у вас .png чи .jpg
+                    break;
+                default:
+                    fixedImageName = "logo.png";
+                    break;
+            }
+
+            // 2. Формуємо повний шлях
+            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+            string relativePath = System.IO.Path.Combine("Images", "Plants", fixedImageName);
             string fullPath = System.IO.Path.Combine(baseDir, relativePath);
 
-            var imgBrush = new ImageBrush();
+            ImageBrush? imgBrush = null;
 
-            // 2. Перевіряємо, чи файл існує
+            // 3. Завантажуємо картинку для кнопки
             if (File.Exists(fullPath))
             {
                 try
                 {
-                    // Використовуємо абсолютний шлях
+                    imgBrush = new ImageBrush();
                     imgBrush.ImageSource = new BitmapImage(new Uri(fullPath, UriKind.Absolute));
                 }
-                catch { /* Ігноруємо биті зображення */ }
+                catch { }
             }
             else
             {
-                // 3. Фолбек, якщо картинки немає (щоб програма не падала)
-                // Спробуємо завантажити дефолтну, або залишимо пустим
+                // Фолбек на логотип
                 try
                 {
-                    // Спробуємо знайти logo.png або просто залишимо сірий квадрат
-                    string fallbackPath = System.IO.Path.Combine(baseDir, "Images", "logo.png");
-                    if (File.Exists(fallbackPath))
-                        imgBrush.ImageSource = new BitmapImage(new Uri(fallbackPath, UriKind.Absolute));
+                    string logoPath = System.IO.Path.Combine(baseDir, "Images", "logo.png");
+                    if (File.Exists(logoPath))
+                    {
+                        imgBrush = new ImageBrush();
+                        imgBrush.ImageSource = new BitmapImage(new Uri(logoPath, UriKind.Absolute));
+                    }
                 }
                 catch { }
             }
 
-            // Якщо картинки немає, ставимо колір, щоб кнопку було видно
-            if (imgBrush.ImageSource == null)
-            {
-                imgBrush = null; // Буде використано Fill з Rectangle (за замовчуванням прозорий або сірий)
-            }
-
+            // 4. Створюємо візуал кнопки
             var rect = new Rectangle
             {
                 Width = 32,
@@ -498,14 +527,16 @@ namespace FarmsteadMap.WPF
             Grid.SetColumn(sp, 1); grid.Children.Add(sp);
 
             btn.Content = grid;
+
+            // 5. При кліку передаємо ПРАВИЛЬНИЙ шлях (fullPath) далі в інструмент розміщення
             btn.Click += (s, e) => {
-                // Тут також передаємо повний шлях або відносний, але коректний
-                // Краще зберегти відносний для DTO, але при відображенні GhostObject використовувати перевірку
+                string finalImagePath = (imgBrush != null && File.Exists(fullPath)) ? fullPath : "/Images/logo.png";
+
                 _selectedAssetToPlace = new EditorAsset
                 {
                     Id = (int)id,
                     Name = name,
-                    Image = File.Exists(fullPath) ? fullPath : "/Images/logo.png", // Передаємо валідний шлях
+                    Image = finalImagePath, // <-- Тут тепер буде локальний шлях
                     Type = type
                 };
                 SetTool(EditorTool.PlaceAsset);
@@ -898,8 +929,11 @@ namespace FarmsteadMap.WPF
 
         private async void OpenSortModal(long id, string type)
         {
+            // Очищаємо перед завантаженням
             PlantSortComboBox.ItemsSource = null;
             PlantSortTitle.Text = type == "tree" ? "Оберіть сорт дерева" : "Оберіть сорт овоча";
+
+            // Показуємо модалку одразу (поки вантажиться)
             PlantSortModal.Visibility = Visibility.Visible;
 
             try
@@ -907,19 +941,45 @@ namespace FarmsteadMap.WPF
                 using (var scope = App.AppHost!.Services.CreateScope())
                 {
                     var service = scope.ServiceProvider.GetRequiredService<IMapService>();
+
+                    BaseResponseDTO<List<SortDTO>> res;
+
                     if (type == "tree")
                     {
-                        var res = await service.GetTreeSortsAsync(id);
-                        if (res.Success) PlantSortComboBox.ItemsSource = res.Data;
+                        // MessageBox.Show($"Запит сортів для дерева ID: {id}"); // Розкоментуй для тесту
+                        res = await service.GetTreeSortsAsync(id);
                     }
                     else
                     {
-                        var res = await service.GetVegSortsAsync(id);
-                        if (res.Success) PlantSortComboBox.ItemsSource = res.Data;
+                        res = await service.GetVegSortsAsync(id);
+                    }
+
+                    if (res.Success)
+                    {
+                        if (res.Data != null && res.Data.Count > 0)
+                        {
+                            PlantSortComboBox.ItemsSource = res.Data;
+                            // Автоматично обираємо перший елемент
+                            PlantSortComboBox.SelectedIndex = 0;
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Сортів не знайдено для {type} з ID {id}.\nПеревірте таблицю {(type == "tree" ? "tree_sorts" : "veg_sorts")} в БД.");
+                            PlantSortModal.Visibility = Visibility.Collapsed;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Помилка завантаження сортів: {res.Error}");
+                        PlantSortModal.Visibility = Visibility.Collapsed;
                     }
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Критична помилка: {ex.Message}");
+                PlantSortModal.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void SavePlantSort_Click(object sender, RoutedEventArgs e)

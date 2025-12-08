@@ -37,7 +37,8 @@ namespace FarmsteadMap.BLL.Profiles
 
             //  ‚≥ÚË
             this.CreateMap<Flower, FlowerDTO>();
-
+            CreateMap<TreeSort, SortDTO>();
+            CreateMap<VegSort, SortDTO>();
             // --- —Œ–“» ---
 
             // TreeSort mappings

@@ -78,18 +78,21 @@ namespace FarmsteadMap.DAL.Repositories
         }
 
         /// <inheritdoc/>
-        public async Task<List<TreeSort>> GetTreeSortsAsync()
+        /// <inheritdoc/>
+        public async Task<List<TreeSort>> GetTreeSortsAsync(long treeId) // <--- Додали параметр
         {
             return await this.context.TreeSorts
                 .Include(ts => ts.Tree)
+                .Where(ts => ts.TreeId == treeId) // <--- Додали фільтр SQL (WHERE tree_id = @treeId)
                 .ToListAsync();
         }
 
-        /// <inheritdoc/>
-        public async Task<List<VegSort>> GetVegSortsAsync()
+        // Аналогічно для овочів:
+        public async Task<List<VegSort>> GetVegSortsAsync(long vegId)
         {
             return await this.context.VegSorts
                 .Include(vs => vs.Vegetable)
+                .Where(vs => vs.VegId == vegId) // Переконайся, що властивість називається VegetableId або VegId
                 .ToListAsync();
         }
 

@@ -44,11 +44,9 @@ namespace FarmsteadMap.BLL.Services
 
                     if (!compatibility.Success)
                     {
-                        // Fix CS8604: Ensure error string is never null
                         return BaseResponseDTO<bool>.Fail(compatibility.Error ?? "Unknown compatibility check error");
                     }
 
-                    // Check Data for null before accessing properties
                     if (compatibility.Data != null && !compatibility.Data.IsCompatible)
                     {
                         this.logger.LogWarning($"Валідація розміщення: {compatibility.Data.Message}");
@@ -220,31 +218,34 @@ namespace FarmsteadMap.BLL.Services
             return Math.Sqrt(Math.Pow(point2.X - point1.X, 2) + Math.Pow(point2.Y - point1.Y, 2));
         }
 
-        private async Task<string> GetTreeNameAsync(long treeSortId)
+        // --- ВИПРАВЛЕННЯ ТУТ ---
+        // Використовуємо GetTreesAsync() замість GetTreeSortsAsync(), бо ElementId - це ID типу дерева
+        private async Task<string> GetTreeNameAsync(long treeId)
         {
             try
             {
-                var treeSorts = await this.mapRepository.GetTreeSortsAsync();
-                var treeSort = treeSorts.FirstOrDefault(ts => ts.Id == treeSortId);
-                return treeSort?.Name ?? $"Tree#{treeSortId}";
+                var trees = await this.mapRepository.GetTreesAsync();
+                var tree = trees.FirstOrDefault(t => t.Id == treeId);
+                return tree?.Name ?? $"Tree#{treeId}";
             }
             catch (Exception)
             {
-                return $"Tree#{treeSortId}";
+                return $"Tree#{treeId}";
             }
         }
 
-        private async Task<string> GetVegetableNameAsync(long vegSortId)
+        // Використовуємо GetVegetablesAsync() замість GetVegSortsAsync()
+        private async Task<string> GetVegetableNameAsync(long vegId)
         {
             try
             {
-                var vegSorts = await this.mapRepository.GetVegSortsAsync();
-                var vegSort = vegSorts.FirstOrDefault(vs => vs.Id == vegSortId);
-                return vegSort?.Name ?? $"Vegetable#{vegSortId}";
+                var vegs = await this.mapRepository.GetVegetablesAsync();
+                var veg = vegs.FirstOrDefault(v => v.Id == vegId);
+                return veg?.Name ?? $"Vegetable#{vegId}";
             }
             catch (Exception)
             {
-                return $"Vegetable#{vegSortId}";
+                return $"Vegetable#{vegId}";
             }
         }
     }

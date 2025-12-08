@@ -104,11 +104,11 @@ namespace FarmsteadMap.BLL.Services
         {
             try
             {
-                // Припускаємо, що в репозиторії є метод GetSortsByTreeId, або фільтруємо всі
-                // Краще додати метод в репозиторій: GetTreeSortsByTreeIdAsync(treeId)
-                var allSorts = await this.mapRepository.GetTreeSortsAsync();
-                var filtered = allSorts.Where(s => s.TreeId == treeId).ToList();
-                return BaseResponseDTO<List<SortDTO>>.Ok(this.mapper.Map<List<SortDTO>>(filtered));
+                // ВИПРАВЛЕНО: передаємо treeId у репозиторій
+                var sorts = await this.mapRepository.GetTreeSortsAsync(treeId);
+
+                // Фільтрація тут більше не потрібна, репозиторій поверне тільки потрібні
+                return BaseResponseDTO<List<SortDTO>>.Ok(this.mapper.Map<List<SortDTO>>(sorts));
             }
             catch (Exception ex) { return BaseResponseDTO<List<SortDTO>>.Fail(ex.Message); }
         }
@@ -117,9 +117,10 @@ namespace FarmsteadMap.BLL.Services
         {
             try
             {
-                var allSorts = await this.mapRepository.GetVegSortsAsync();
-                var filtered = allSorts.Where(s => s.VegId == vegId).ToList();
-                return BaseResponseDTO<List<SortDTO>>.Ok(this.mapper.Map<List<SortDTO>>(filtered));
+                // ВИПРАВЛЕНО: передаємо vegId у репозиторій
+                var sorts = await this.mapRepository.GetVegSortsAsync(vegId);
+
+                return BaseResponseDTO<List<SortDTO>>.Ok(this.mapper.Map<List<SortDTO>>(sorts));
             }
             catch (Exception ex) { return BaseResponseDTO<List<SortDTO>>.Fail(ex.Message); }
         }
