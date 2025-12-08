@@ -1,0 +1,235 @@
+﻿<UserControl x:Class="FarmsteadMap.WPF.LoginView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FarmsteadMap.WPF"
+             mc:Ignorable="d" 
+             d:DesignHeight="650" d:DesignWidth="1000">
+
+    <UserControl.Resources>
+        <Style x:Key="ModernTextBox" TargetType="TextBox">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0,0,0,2"/>
+            <Setter Property="BorderBrush" Value="#88FFFFFF"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Margin" Value="0,10"/>
+            <Setter Property="CaretBrush" Value="White"/>
+            <Style.Triggers>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="BorderBrush" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="ModernPasswordBox" TargetType="PasswordBox">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0,0,0,2"/>
+            <Setter Property="BorderBrush" Value="#88FFFFFF"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Margin" Value="0,10"/>
+            <Setter Property="CaretBrush" Value="White"/>
+            <Style.Triggers>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="BorderBrush" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="PrimaryButton" TargetType="Button">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#333"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Margin" Value="0,20,0,10"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#E0E0E0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Image Source="/Images/baner_background.jpg" Stretch="UniformToFill" />
+        <Border Background="#99000000" />
+
+        <Border VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                MinWidth="400" 
+                Background="#556B8E23" 
+                CornerRadius="10"
+                Padding="30">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="0" BlurRadius="20" Color="Black" Opacity="0.4"/>
+            </Border.Effect>
+
+            <Grid>
+
+                <StackPanel x:Name="LoginPanel" 
+                            Visibility="Visible"
+                            Width="400">
+
+                    <TextBlock Text="Увійдіть"
+                               FontSize="32"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,20"/>
+
+                    <TextBlock x:Name="LoginErrorTextBlock"
+                               Text="Неправильний логін або пароль"
+                               Foreground="#FFB6B6"
+                               FontWeight="Bold"
+                               TextWrapping="Wrap"
+                               HorizontalAlignment="Center"
+                               Visibility="Collapsed" 
+                               Margin="0,0,0,10"/>
+
+                    <TextBlock Text="Ім'я користувача" Foreground="White" FontSize="14" Opacity="0.8"/>
+                    <TextBox x:Name="UsernameTextBox" Style="{StaticResource ModernTextBox}"/>
+
+                    <TextBlock Text="Пароль" Foreground="White" FontSize="14" Opacity="0.8" Margin="0,10,0,0"/>
+                    <PasswordBox x:Name="PasswordBox" Style="{StaticResource ModernPasswordBox}"/>
+
+                    <Button Content="Увійти" 
+                            Style="{StaticResource PrimaryButton}"
+                            Click="LoginButton_Click"/>
+
+                    <TextBlock HorizontalAlignment="Center" Foreground="#AAAAAA" Margin="0,10,0,0">
+                        Немаєте аккаунта?
+                        <Hyperlink Foreground="White" 
+                                   TextDecorations="None" 
+                                   FontWeight="Bold"
+                                   Click="ShowRegisterPanel_Click">
+                            Зареєструватись
+                        </Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+
+                <StackPanel x:Name="RegistrationPanel" 
+                            Visibility="Collapsed"
+                            Width="550">
+
+                    <TextBlock Text="Реєстрація"
+                       FontSize="32"
+                       FontWeight="Bold"
+                       Foreground="White"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,15"/>
+
+                    <TextBlock x:Name="RegisterErrorTextBlock"
+                       Text="Помилка реєстрації"
+                       Foreground="#FFB6B6"
+                       FontWeight="Bold"
+                       TextWrapping="Wrap"
+                       TextAlignment="Center"
+                       Visibility="Collapsed" 
+                       Margin="0,0,0,10"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                            <TextBlock Text="Прізвище" Foreground="White" FontSize="14" Opacity="0.8"/>
+                            <TextBox x:Name="RegLastNameTextBox" Style="{StaticResource ModernTextBox}" Margin="0,5,0,10"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1" Margin="5,0,0,0">
+                            <TextBlock Text="Ім'я" Foreground="White" FontSize="14" Opacity="0.8"/>
+                            <TextBox x:Name="RegFirstNameTextBox" Style="{StaticResource ModernTextBox}" Margin="0,5,0,10"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <TextBlock Text="Ім'я користувача (username)" Foreground="White" FontSize="14" Opacity="0.8"/>
+                    <TextBox x:Name="RegUsernameTextBox" Style="{StaticResource ModernTextBox}" Margin="0,5,0,10"/>
+
+                    <TextBlock Text="Email" Foreground="White" FontSize="14" Opacity="0.8"/>
+                    <TextBox x:Name="RegEmailTextBox" Style="{StaticResource ModernTextBox}" Margin="0,5,0,10"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                            <TextBlock Text="Пароль" Foreground="White" FontSize="14" Opacity="0.8"/>
+                            <PasswordBox x:Name="RegPasswordBox" Style="{StaticResource ModernPasswordBox}" Margin="0,5,0,10"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1" Margin="5,0,0,0">
+                            <TextBlock Text="Підтвердіть пароль" Foreground="White" FontSize="14" Opacity="0.8"/>
+                            <PasswordBox x:Name="RegConfirmPasswordBox" Style="{StaticResource ModernPasswordBox}" Margin="0,5,0,10"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <CheckBox x:Name="RegTermsCheckBox" 
+                              Foreground="White" 
+                              Opacity="0.8" 
+                              FontSize="12"
+                              Margin="0,10,0,5">
+                        <TextBlock TextWrapping="Wrap">
+                            Я погоджуюсь з 
+                            <Hyperlink Foreground="White" FontWeight="Bold"
+                                       NavigateUri="https://farmsteadhelper.pythonanywhere.com/static/terms_of_use.pdf"
+                                       RequestNavigate="Hyperlink_RequestNavigate">
+                                Умовами Використання
+                            </Hyperlink>
+                            та 
+                            <Hyperlink Foreground="White" FontWeight="Bold"
+                                       NavigateUri="https://farmsteadhelper.pythonanywhere.com/static/privacy_policy.pdf"
+                                       RequestNavigate="Hyperlink_RequestNavigate">
+                                Політикою Конфіденційності
+                            </Hyperlink>.
+                        </TextBlock>
+                    </CheckBox>
+
+                    <CheckBox x:Name="RegPrivacyCheckBox" 
+                              Foreground="White" 
+                              Opacity="0.8" 
+                              FontSize="12"
+                              Margin="0,5,0,10">
+                        <TextBlock TextWrapping="Wrap">
+                            Я даю згоду на обробку моїх персональних даних.
+                        </TextBlock>
+                    </CheckBox>
+
+                    <Button Content="Зареєструватись" 
+                            Style="{StaticResource PrimaryButton}"
+                            Click="RegisterButton_Click"/>
+
+                    <TextBlock HorizontalAlignment="Center" Foreground="#AAAAAA" Margin="0,10,0,0">
+                        Вже маєте акаунт?
+                        <Hyperlink Foreground="White" 
+                                   TextDecorations="None" 
+                                   FontWeight="Bold"
+                                   Click="ShowLoginPanel_Click">
+                            Увійти
+                        </Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
